@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+require 'erb'
+
+class GlassXSDK_
+
+  def initialize
+    @funcs = []
+    run
+  end
+
+  def func name, options = {}
+    options[:callback] = nil
+    alias_name = String.new name
+    alias_name[0] = alias_name[0].upcase
+    @funcs << { name: name, options: options, alias: alias_name }
+  end
+
+  def string
+    "s_"
+  end
+
+  def int
+    "n_"
+  end
+
+  def float
+    "f_"
+  end
+
+  def date
+    "d_"
+  end
+
+  def run
+    source = File.open("./test.gsdk").read
+    eval(source)
+  end
+
+  def method_missing(meth, *args, &blk)
+    meth.to_s
+  end
+
+end
+
+erb = ERB.new(File.read File.expand_path(File.join File.dirname(__FILE__), 
+  "../lib/template.js.erb"))
+
+erb.filename = 'sdk.js.erb'
+
+GlassXSDK = erb.def_class(GlassXSDK_, 'render()')
+
+print GlassXSDK.new.render()
