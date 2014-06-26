@@ -50,4 +50,8 @@ erb.filename = 'sdk.js.erb'
 
 GlassXSDK = erb.def_class(GlassXSDK_, 'render()')
 
-print GlassXSDK.new(ARGV[0]).render()
+code = GlassXSDK.new(ARGV[0]).render()
+
+filename = ARGV[1] || "sdk.js"
+
+File.new("./#{filename}", 'w').write code
