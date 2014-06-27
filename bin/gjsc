@@ -33,7 +33,7 @@ class GlassXSDK_
     "d_"
   end
 
-  def func
+  def fun
     "m_"
   end
 
