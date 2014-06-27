@@ -33,12 +33,12 @@ class GlassXSDK_
     "d_"
   end
 
-  def run
-    eval(@source)
-  end
-
   def func
     "m_"
+  end
+
+  def run
+    eval(@source)
   end
 
   def method_missing(meth, *args, &blk)
