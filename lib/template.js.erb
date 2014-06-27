@@ -3,7 +3,11 @@ var glassx.sdk.<%= func[:name] %> = function (<%= func[:options].keys.join(", ")
   var data = {}
   <% func[:options].delete(:callback) %>
   <% func[:options].each do |key, value| %>
+  <% if value == func %>
   data["<%= value + key.to_s  %>"] = <%= key %>.toString()
+  <% else %>
+  data["<%= value + key.to_s  %>"] = <%= key %>
+  <% end %>
   <% end %>
   glassx.sdk.adb("<%= func[:alias] %>", data, callback)
 }
