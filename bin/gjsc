@@ -37,13 +37,17 @@ class GlassXSDK_
     eval(@source)
   end
 
+  def func
+    "m_"
+  end
+
   def method_missing(meth, *args, &blk)
     meth.to_s
   end
 
 end
 
-erb = ERB.new(File.read File.expand_path(File.join File.dirname(__FILE__), 
+erb = ERB.new(File.read File.expand_path(File.join File.dirname(__FILE__),
   "../lib/template.js.erb"))
 
 erb.filename = 'sdk.js.erb'
